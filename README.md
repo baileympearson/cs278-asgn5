@@ -1,11 +1,12 @@
-# cs278-asgn5
+# Lunch Wait Bot
 
-	One problem that many Vanderbilt students and staff members face is
+One problem that many Vanderbilt students and staff members face is
 increasingly long lines and wait times during the lunch rush.  Speaking from
 experience with friends or just by myself, oftentimes we receive our food with
 so late that we are forced to take our food to class and eat.  All in all, the
 lunch rush at Vanderbilt can end up being more stressful than relaxing.
-	This project aims to help students find places to eat during the lunch rush
+
+This project aims to help students find places to eat during the lunch rush
 on Vanderbit's main campus.  The project is not aimed at helping students who eat 
 on Commons since Commons is far enough away from main campus that people have no choice 
 but to eat there if they need to stay on Commons.  Furthermore, this app is not designed
@@ -13,7 +14,9 @@ to help students choose locations to eat based on their food preferences.  Vande
 publishes an official campus dining app which has the menu of each campus dining,
 and a seperate service performing the same task would be redundant.
 
-
+This project will provide a texting interface through which students can register 
+for the service, and then will receive suggestions on the least busy dining locations 
+around main campus.
 
 # Questions:
   1. Do you eat on campus for lunch?  If so, where?
