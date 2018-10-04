@@ -15,22 +15,22 @@
 
 # Answers:
 ## Question 1:
-- Yes, either in rand at the sauté spot, pub, or the library cafe
+1. Yes, either in rand at the sauté spot, pub, or the library cafe
 ## Question 2:
-- How much time I have to socialize
+1. How much time I have to socialize
 ## Question 3:
-- My lunch break is long enough that this is not an issue
+1. My lunch break is long enough that this is not an issue
 ## Question 4:
-- Yes, but only if it were a busy day and the place had study spots nearby 
+1. Yes, but only if it were a busy day and the place had study spots nearby 
 ## Question 5:
-- That would be fairly clutch 
+1. That would be fairly clutch 
 ## Question 6:
-- Possibly, depending on how easy it would be
+1. Possibly, depending on how easy it would be
 ## Question 7:
-- yes, but the idea might suffer from the tragedy of the commons
+1. yes, but the idea might suffer from the tragedy of the commons
 ## Question 8:
-- honesty, not entirely
+1. honesty, not entirely
 ## Question 9:
-- waiting time would be ideal, potentially if there were items that were out of stock 
+1. waiting time would be ideal, potentially if there were items that were out of stock 
 ## Question 10:
-- 10% error
+1. 10% error
