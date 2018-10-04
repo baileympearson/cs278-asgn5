@@ -72,3 +72,15 @@ around main campus.
 1. 10% error
 2. I would say an error rate of anything greater than 10 minutes over would be unacceptable especially if I have increased my walking distance to find a location with a shorter wait time.
 3. That's acceptable particularly during the beginning or end of lunch rush when the wait times are rapidly changing.
+
+
+# Requirements
+
+Here are the general requirements for my service:
+- Users should be able to enter the specific locations on campus that they care about and then only receive information about these locations
+- Users should be able to query about the wait at a specific location on campus
+- Users should be able to enter the actual wait time at a location
+- 
+- Wait times should be saved so that estimates become more accurate with time.
+
+# Development Approach
