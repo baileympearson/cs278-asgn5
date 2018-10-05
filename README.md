@@ -80,9 +80,8 @@ Here are the general requirements for my service.
 - The main interface will be through texting
 - Users should be able to receive a list of all dining locations and wait times associated with them.
 - Users should be able to enter the actual wait time at a location
+- Users should be able 
 - Users should be able to unregister at any time.
-
-<!-- - Users should be able to enter the specific locations on campus that they care about and then only receive information about these locations -->
 
 # Development Approach
 ### Requirement Gathering
@@ -121,13 +120,41 @@ The following are the commands that I envision the service implementing:
 	- unregister
 		- removes the current user from the subscribed users
 	
-The crux of the application will be reporting accurate wait times.  I realize that the current method for resolving wait times is not the most accurate method.
+The crux of the application will be reporting accurate wait times.  I realize that the current method for resolving wait times is not the most accurate method.  It would be beneficial if, in the future, it were possible to easily change the manner in which the waiting time is calculated.
+To accomidate this, the wait time will be built seperately and exposed to the rest of the application through a small API.  This allows the 
+implementation of the API to change, but the use can remain unchanged.
+
+
+#### Rationale
+This service revolves around reporting the wait time to Vanderbilt students during the lunch rush.  I chose to keep the actual functionality slim 
+so that I could build a working prototype for the demo in class.  
 
 ### Implementation and Estimation
-##### Wait Command
+#### Time Estimation System
+This portion of the service will be built first.  The time estimation will initially consist of a simple module that accesses a store of wait 
+times for each dining location.  The program will be able calculate the estimated waiting time for each dining location and expose these values to the rest of the application through a small API (yet to be defined).
+###### Estimation
+I estimate this portion of the project to take about two days of work.  The majority of the time will be spent understanding the kvstore code from assignments 1-4 and designing an implementation that stores data for each dining location.
+
+#### Build application logic flow
+This portion of the development process will focus on building a framework for the application.  Since we have already built an example texting
+program, this portion of the program will consist mainly of adapting the existing framework to handle the specific commands I desire.
+###### Estimation
+I estimate this portion of the project to take about half a day of work.  This portion of the project mainly involves adjusting the existing 
+outline to work for my specific service.
+
+#### Parse Input
+This portion of the project is mostly finished.  I plan to add additional functionality, including case insensitivity to the commands passed by 
+the user and some sort of fuzzy matching for the campus dining locations.
+###### Estimation
+I estimate this portion of the project will take about half a day to complete.
+
+#### Wait Command
+This portion of the project involves implementing the wait command.  The wait command is responsible for querying for the wait time for each command entered by the user and responding with a list of wait times for all campus dining locations.  This command should be easy to implement, since it simply needs to retrieve data from the kvstore and send it to the user.
+###### Estimation
+I estimate this will take roughly a day to complete.
+
+#### Report Command
+This portion of the project involes storing the wait time the user sent into the kvstore.  
 
 ### Testing
-
-
-What should we actually write up for part 2 of this assignment?
-	- asdf
