@@ -155,6 +155,24 @@ This portion of the project involves implementing the wait command.  The wait co
 I estimate this will take roughly a day to complete.
 
 #### Report Command
-This portion of the project involes storing the wait time the user sent into the kvstore.  
+This portion of the project involes storing the wait time the user sent into the kvstore.
+###### Estimation
+I estimate this portion of the application will take about a day of work as well.
+
+#### Daily Update
+Both this module and the below module need to be designed together since they must work with the same interface to the data.  This portion 
+will involve writing a second AWS Lambda function to periodically check and send texts to users.  
+###### Estimation
+This portion of the project will be the most time consuming.  The initial design period will take the most time.  Once the design for the 
+kvstore holding the list of people to text, the implementation will be straightforward.  I estimate this portion of the project to take roughly 
+2 days to complete once the design is complete.
+
+#### User Registration / Unregister
+This portion of the assignment is concerned with the user registering / unregistering for daily updates.  This portion must access the same kvstore 
+as the previous section.
+###### Estimation
+Since this portion of the assignment simply adds or removes a user from the kvstore, I expect this portion of the assignment to take no more than a
+day to complete.
 
 ### Testing
+All of the testing for the project will be done in a manner similar to assignments 1-4.  I will use lein test-refresh to run the grading script as each change is made to ensure accuracy.
