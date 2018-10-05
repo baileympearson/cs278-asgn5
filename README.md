@@ -111,14 +111,14 @@ The design for this application will be similar to the application built in clas
 built in class to receive a text and parse the input will need to be modified only slightly.  Once the message is parsed and the correct information obtained, then it will be routed to the correct route handler.
 
 The following are the commands that I envision the service implementing:
-	- wait
-		- returns the wait times of all open campus dining locations, in alphabetical order
-	- report <dining location> <actual time in minutes>
-		- associates the wait time with the dining location and stores the results
-	- register
-		- launches the registration lambda function
-	- unregister
-		- removes the current user from the subscribed users
+- wait
+	- returns the wait times of all open campus dining locations, in alphabetical order
+- report <dining location> <actual time in minutes>
+	- associates the wait time with the dining location and stores the results
+- register
+	- launches the registration lambda function
+- unregister
+	- removes the current user from the subscribed users
 	
 The crux of the application will be reporting accurate wait times.  I realize that the current method for resolving wait times is not the most accurate method.  It would be beneficial if, in the future, it were possible to easily change the manner in which the waiting time is calculated.
 To accomidate this, the wait time will be built seperately and exposed to the rest of the application through a small API.  This allows the 
