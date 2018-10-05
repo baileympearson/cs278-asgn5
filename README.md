@@ -75,12 +75,29 @@ around main campus.
 
 
 # Requirements
+Here are the general requirements for my service.  
 
-Here are the general requirements for my service:
-- Users should be able to enter the specific locations on campus that they care about and then only receive information about these locations
-- Users should be able to query about the wait at a specific location on campus
+- The main interface will be through texting
+- Users should be able to receive a list of all dining locations and wait times associated with them.
 - Users should be able to enter the actual wait time at a location
-- 
-- Wait times should be saved so that estimates become more accurate with time.
+- Users should be able to unregister at any time.
+
+<!-- - Users should be able to enter the specific locations on campus that they care about and then only receive information about these locations -->
 
 # Development Approach
+### Requirement Gathering
+
+There are two major influences that informed the requirements that I chose (and subsequently my design).  First, the initial interface must be done through text and second, that users should be provided a method to wait times for their preferred campus dining locations.
+
+I choose these two requirements to be the guiding requirements of the project for the following reason.  The only commonality among all responses was that receiving wait times would be beneficial.  Other responses, such as the ability to choose certain locations to receive information from or to be able to query if there are locations to sit were individual responses.  I agree that responses would be convenient, but I will delegate them to a later time.
+
+The next requirement was that users should be able to report the wait time at a particular location.  This is necessary for two reasons.  First, in the initial version of the service, wait times will be crowd-sourced, meaning that the wait time that is reported to the user will be based on others' reported wait times.  Second, by recording the actual wait time, it becomes possible to compare the expected wait time to the actual wait time.
+
+The last requirement is that users can unsubscribe at any time.  While this was not explicitly stated by any of the interviewees, from personal experience, I know that receiving unwanted texts can be annoying.  Furthermore, a future feature would be time-based automatic suggestions, where the user enters their lunch schedule and they receive notifications automatically at their lunch time.  If this feature were to be implemented, then users would want the ability to turn off these notifications.
+
+### Design
+The design for this application will be similar to the application built in class.  
+
+### Implementation (steps)
+
+### Estimation
