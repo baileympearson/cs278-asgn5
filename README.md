@@ -93,11 +93,19 @@ I choose these two requirements to be the guiding requirements of the project fo
 
 The next requirement was that users should be able to report the wait time at a particular location.  This is necessary for two reasons.  First, in the initial version of the service, wait times will be crowd-sourced, meaning that the wait time that is reported to the user will be based on others' reported wait times.  Second, by recording the actual wait time, it becomes possible to compare the expected wait time to the actual wait time.
 
-The last requirement is that users can unsubscribe at any time.  While this was not explicitly stated by any of the interviewees, from personal experience, I know that receiving unwanted texts can be annoying.  Furthermore, a future feature would be time-based automatic suggestions, where the user enters their lunch schedule and they receive notifications automatically at their lunch time.  If this feature were to be implemented, then users would want the ability to turn off these notifications.
+The last requirement is that users can unsubscribe at any time.  While this was not explicitly stated by any of the interviewees, from personal experience, I know that receiving unwanted texts can be annoying.  Furthermore, a potential feature would be time-based automatic suggestions, where the user enters their lunch schedule and they receive notifications automatically at their lunch time.  If this feature were to be implemented, then users would want the ability to turn off these notifications.
+
+### Features
+I create a seperate features section to talk about features that I plan on implementing in the project, as well as ideas for features in the future.
+
+1. User Registration
+	- asdf
 
 ### Design
-The design for this application will be similar to the application built in class.  
+The design for this application will be similar to the application built in class.  The main interface will be through texting, so the framework 
+built in class will only be modified slightly.  
 
-### Implementation (steps)
+### Implementation and Estimation
 
-### Estimation
+
+### Testing
