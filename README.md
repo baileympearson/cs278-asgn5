@@ -98,14 +98,36 @@ The last requirement is that users can unsubscribe at any time.  While this was 
 ### Features
 I create a seperate features section to talk about features that I plan on implementing in the project, as well as ideas for features in the future.
 
-1. User Registration
-	- asdf
+1. Wait Time List
+	- returns a list of wait times for all of the campus dining locations that are open
+2. Report Wait Time
+	- A user will be able to report the wait time at a particular dinint location on campus.
+3. User Registration
+	- A user can register for the app.  If they choose to do this, they will input their schedule MON-FRI and their typical lunch times.  If the user chooses to to register, they will receive texts at their chosen time MON-FRI.
+4. User Unregistration
+	- If a user is registered, they can unregister at any time.  This will stop the daily texts.
 
 ### Design
 The design for this application will be similar to the application built in class.  The main interface will be through texting, so the framework 
-built in class will only be modified slightly.  
+built in class to receive a text and parse the input will need to be modified only slightly.  Once the message is parsed and the correct information obtained, then it will be routed to the correct route handler.
+
+The following are the commands that I envision the service implementing:
+	- wait
+		- returns the wait times of all open campus dining locations, in alphabetical order
+	- report <dining location> <actual time in minutes>
+		- associates the wait time with the dining location and stores the results
+	- register
+		- launches the registration lambda function
+	- unregister
+		- removes the current user from the subscribed users
+	
+The crux of the application will be reporting accurate wait times.  I realize that the current method for resolving wait times is not the most accurate method.
 
 ### Implementation and Estimation
-
+##### Wait Command
 
 ### Testing
+
+
+What should we actually write up for part 2 of this assignment?
+	- asdf
