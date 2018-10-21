@@ -404,9 +404,12 @@
 
 ;; Don't edit!
 (def queries
-  {"expert" experts-on-topic-query
-   "ask"    experts-on-topic-query
-   "answer" conversations-for-user-query})
+	{
+		"expert" experts-on-topic-query
+   		"ask"    experts-on-topic-query
+		"answer" conversations-for-user-query
+	}
+)
 
 
 ;; Don't edit!
