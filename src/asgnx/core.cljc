@@ -2,8 +2,14 @@
   (:require [clojure.string :as string]
             [clojure.core.async :as async :refer [go chan <! >!]]
             [asgnx.kvstore :as kvstore
-             :refer [put! get! list! remove!]]))
+			 :refer [put! get! list! remove!]]
 
+			[asgnx.commands.wait :as wait]
+			[asgnx.commands.register :as register]
+			[asgnx.commands.unregister :as unregister]
+			[asgnx.commands.report :as report]
+	)
+)
 
 ;; Do not edit!
 ;; A def for the course home page URL.
