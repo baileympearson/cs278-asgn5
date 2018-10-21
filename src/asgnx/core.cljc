@@ -318,17 +318,21 @@
 	(locations/get-all state-mgr)
 )
 
-(defn get-users [state-mgr pmsg]
+(defn get-all-users [state-mgr pmsg]
 	(users/get-all state-mgr)
+)
+
+(defn get-user [state-mgr pmsg]
+	(users/get-one state-mgr (:user_id pmsg))
 )
 
 ;; Don't edit!
 (def queries
 	{
-		"wait"		get-locations
-		"report" 	get-locations
-		"register" 	get-users
-		"unregister" get-users
+		"wait"			get-locations
+		"report" 		get-locations
+		"register" 		get-all-users
+		"unregister" 	get-user
 	}
 )
 
