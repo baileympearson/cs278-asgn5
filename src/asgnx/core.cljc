@@ -303,11 +303,11 @@
 ;; Here are the routes I defined for the program
 (def routes 
 	{
-		"default"  (stateless (fn [& args] "Unknown command."))
-		; "wait" 		
-		; "report"
-		; "register" 
-		; "unregister" 
+		"default"  		(stateless (fn [& args] "Unknown command."))
+		"wait" 			wait/handler	
+		"report"		report/handler
+		"register" 		register/handler
+		"unregister" 	unregister/handler
 	}
 )
 

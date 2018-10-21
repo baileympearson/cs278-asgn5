@@ -3,3 +3,7 @@
             [asgnx.kvstore :as kvstore]
   )
 )
+
+(defn handler [state pmsg]
+	[[] "hello from handler"]
+)
