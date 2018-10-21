@@ -6,7 +6,10 @@
             [clojure.test.check.generators :as gen]
 			[asgnx.core :refer :all]
 			[asgnx.parser :as parser]
-            [asgnx.kvstore :as kvstore :refer [put! get!]]))
+			[asgnx.kvstore :as kvstore :refer [put! get!]]
+			[asgnx.actions :as actions]
+	)
+)
 
 
 
@@ -72,21 +75,21 @@
 (deftest action-send-msg-test
   (testing "That action send msg returns a correctly formatted map"
     (is (= :send
-           (:action (action-send-msg :bob "foo"))))
+           (:action (actions/send-msg :bob "foo"))))
     (is (= :bob
-           (:to (action-send-msg :bob "foo"))))
+           (:to (actions/send-msg :bob "foo"))))
     (is (= "foo"
-           (:msg (action-send-msg [:a :b] "foo"))))))
+           (:msg (actions/send-msg [:a :b] "foo"))))))
 
 
 (deftest action-send-msgs-test
   (testing "That action send msgs generates a list of sends"
-    (let [a (action-send-msg [:a :f :b] 1)
-          b (action-send-msg [:a :f :d] 1)
-          c (action-send-msg [:a :f :e] 1)
-          d (action-send-msg [:a :f :c] 1)]
+    (let [a (actions/send-msg [:a :f :b] 1)
+          b (actions/send-msg [:a :f :d] 1)
+          c (actions/send-msg [:a :f :e] 1)
+          d (actions/send-msg [:a :f :c] 1)]
       (is (= [a b c d]
-             (action-send-msgs [[:a :f :b]
+             (actions/send-msgs [[:a :f :b]
                                 [:a :f :d]
                                 [:a :f :e]
                                 [:a :f :c]]
@@ -95,37 +98,37 @@
 (deftest action-insert-test
   (testing "That action insert returns a correctly formatted map"
     (is (= #{:action :ks :v}
-           (into #{}(keys (action-insert [:a :b] {:foo 1})))))
+           (into #{}(keys (actions/insert [:a :b] {:foo 1})))))
     (is (= #{:assoc-in [:a :b] {:foo 1}}
-           (into #{}(vals (action-insert [:a :b] {:foo 1})))))
+           (into #{}(vals (actions/insert [:a :b] {:foo 1})))))
     (is (= :assoc-in
-           (:action (action-insert [:a :b] {:foo 1}))))
+           (:action (actions/insert [:a :b] {:foo 1}))))
     (is (= {:foo 1}
-           (:v (action-insert [:a :b] {:foo 1}))))
+           (:v (actions/insert [:a :b] {:foo 1}))))
     (is (= [:a :b]
-           (:ks (action-insert [:a :b] {:foo 1}))))))
+           (:ks (actions/insert [:a :b] {:foo 1}))))))
 
 
 (deftest action-remove-test
   (testing "That action remove returns a correctly formatted map"
     (is (= #{:action :ks}
-         (into #{} (keys (action-remove [:a :b])))))
+         (into #{} (keys (actions/delete [:a :b])))))
     (is (= #{:dissoc-in [:a :b]}
-          (into #{}(vals (action-remove [:a :b])))))
+          (into #{}(vals (actions/delete [:a :b])))))
     (is (= :dissoc-in
-           (:action (action-remove [:a :b]))))
+           (:action (actions/delete [:a :b]))))
     (is (= [:a :b]
-           (:ks (action-remove [:a :b]))))))
+           (:ks (actions/delete [:a :b]))))))
 
 
 (deftest action-inserts-test
   (testing "That action inserts generates a list of inserts"
-    (let [a (action-insert [:a :f :b] 1)
-          b (action-insert [:a :f :d] 1)
-          c (action-insert [:a :f :e] 1)
-          d (action-insert [:a :f :c] 1)]
+    (let [a (actions/insert [:a :f :b] 1)
+          b (actions/insert [:a :f :d] 1)
+          c (actions/insert [:a :f :e] 1)
+          d (actions/insert [:a :f :c] 1)]
       (is (= [a b c d]
-             (action-inserts [:a :f] [:b :d :e :c] 1))))))
+             (actions/inserts [:a :f] [:b :d :e :c] 1))))))
 
 
 (defn action-send [system {:keys [to msg]}]

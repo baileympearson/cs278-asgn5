@@ -1,4 +1,4 @@
-(ns asgnx.models.locations
+(ns asgnx.models.users
 	"
 	Provides an easy user interface to deal the 'db' used in kvstore.
 	Each user has the following structure:
@@ -19,18 +19,19 @@
 
 
 (defn get-all [state]
-	(get! state [:locations])
+	(get! state [:users])
 )
 
 
-(defn get-one [state location]
-	(get! state [:locations location])
+(defn get-one [state user_id]
+	(get! state [:users user_id])
 )
 
 (defn update-one
-	([state location new-data] 		(actions/insert [:locations location] new-data))
+	([state user_id new-data] 		(actions/insert [:users user_id] new-data))
+	([state user_id field new-data] (actions/insert [:users user_id field] new-data))
 )
 
-(defn delete [state location]
-	(actions/delete [:locations location])	
+(defn delete [state user_id]
+	(actions/delete [:users user_id])	
 )

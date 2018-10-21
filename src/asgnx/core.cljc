@@ -4,6 +4,8 @@
             [asgnx.kvstore :as kvstore
 			 :refer [put! get! list! remove!]]
 
+            [asgnx.actions :as actions]
+
 			[asgnx.locations :refer [dining-locations]]
 
 			[asgnx.parser :as parser]
@@ -12,90 +14,12 @@
 			[asgnx.commands.register :as register]
 			[asgnx.commands.unregister :as unregister]
 			[asgnx.commands.report :as report]
+			[asgnx.models.locations :as locations]
+			[asgnx.models.users :as users]
 	)
 )
 
 
-;; Asgn 2.
-;;
-;; @Todo: Create a function called action-send-msg that takes
-;; a destination for the msg in a parameter called `to`
-;; and the message in a parameter called `msg` and returns
-;; a map with the keys :to and :msg bound to each parameter.
-;; The map should also have the key :action bound to the value
-;; :send.
-;;
-(defn action-send-msg [to msg] (hash-map :to to :msg msg :action :send))
-
-
-
-;; Asgn 2.
-;;
-;; @Todo: Create a function called action-send-msgs that takes
-;; takes a list of people to receive a message in a `people`
-;; parameter and a message to send them in a `msg` parmaeter
-;; and returns a list produced by invoking the above `action-send-msg`
-;; function on each person in the people list.
-;;
-;; java-like pseudo code:
-;;
-;; output = new list
-;; for person in people:
-;;   output.add( action-send-msg(person, msg) )
-;; return output
-;;
-(defn action-send-msgs [people msg]
-  (map #(action-send-msg % msg) people))
-
-
-;; Asgn 2.
-;;
-;; @Todo: Create a function called action-insert that takes
-;; a list of keys in a `ks` parameter, a value to bind to that
-;; key path to in a `v` parameter, and returns a map with
-;; the key :ks bound to the `ks` parameter value and the key :v
-;; vound to the `v` parameter value.)
-;; The map should also have the key :action bound to the value
-;; :assoc-in.
-;;
-(defn action-insert [ks v]
-  {:action :assoc-in, :ks ks, :v v})
-
-
-;; Asgn 2.
-;;
-;; @Todo: Create a function called action-inserts that takes:
-;; 1. a key prefix (e.g., [:a :b])
-;; 2. a list of suffixes for the key (e.g., [:c :d])
-;; 3. a value to bind
-;;
-;; and calls (action-insert combined-key value) for each possible
-;; combined-key that can be produced by appending one of the suffixes
-;; to the prefix.
-;;
-;; In other words, this invocation:
-;;
-;; (action-inserts [:foo :bar] [:a :b :c] 32)
-;;
-;; would be equivalent to this:
-;;
-;; [(action-insert [:foo :bar :a] 32)
-;;  (action-insert [:foo :bar :b] 32)
-;;  (action-insert [:foo :bar :c] 32)]
-;;
-(defn action-inserts [prefix ks v]
-  (map #(action-insert (conj prefix %) v) ks))
-
-;; Asgn 2.
-;;
-;; @Todo: Create a function called action-remove that takes
-;; a list of keys in a `ks` parameter and returns a map with
-;; the key :ks bound to the `ks` parameter value.
-;; The map should also have the key :action bound to the value
-;; :dissoc-in.
-;;
-(defn action-remove [ks]
-  {:action :dissoc-in, :ks ks})
 
 ;; Asgn 3.
 ;;
@@ -115,7 +39,7 @@
 ;; expectations on how your code operatesr
 ;;
 (defn experts-register [experts topic id info]
-	(action-insert [:expert topic id] info)
+	(actions/insert [:expert topic id] info)
 )
 
 ;; Asgn 3.
@@ -135,7 +59,7 @@
 ;; expectations on how your code operates
 ;;
 (defn experts-unregister [experts topic id]
-	(action-remove [:expert topic id]))
+	( [:expert topic id]))
 
 
 (defn experts-question-msg [experts question-words]
@@ -226,9 +150,9 @@
 ;;
 
 (defn ask-experts-helper [experts msg user-id]
-	(let [send-msgs (action-send-msgs experts msg)
-			send-plus-log (into send-msgs (action-inserts [:msgs] experts msg))
-			ret (into send-plus-log (action-inserts [:conversations] experts {:user user-id :msg msg}))
+	(let [send-msgs (actions/send-msgs experts msg)
+			send-plus-log (into send-msgs (actions/inserts [:msgs] experts msg))
+			ret (into send-plus-log (actions/inserts [:conversations] experts {:user user-id :msg msg}))
 		]
 		(vec ret)
 		)
@@ -248,8 +172,6 @@
 		;; is it a valid request?
 		(if-not (valid-msg ret_msg) 
 			[[] ret_msg]
-			; [(into (action-send-msgs experts msg) [(action-inserts [:msgs] experts msg) (action-inserts [:conversations] experts {:user user-id :msg msg})
-			; ]) ret_msg]
 			[(ask-experts-helper experts msg user-id) ret_msg]
 		)
 	)
@@ -315,7 +237,7 @@
 		:else (
 				let
 					[msg (string/join " "args)]
-					[[(action-send-msg (:user conversation) msg)] "Your answer was sent."]
+					[[(actions/send-msg (:user conversation) msg)] "Your answer was sent."]
 				)
 	)
 )

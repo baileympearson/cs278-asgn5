@@ -1,2 +1,0 @@
-(ns asgnx.models.user
-	)
