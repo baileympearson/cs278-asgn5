@@ -28,10 +28,10 @@
 )
 
 (defn update-one
-	([state user_id new-data] 		(actions/insert [:users user_id] new-data))
-	([state user_id field new-data] (actions/insert [:users user_id field] new-data))
+	([user_id new-data] 		(actions/insert [:users user_id] new-data))
+	([user_id field new-data] (actions/insert [:users user_id field] new-data))
 )
 
-(defn delete [state user_id]
+(defn delete [user_id]
 	(actions/delete [:users user_id])	
 )

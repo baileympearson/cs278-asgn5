@@ -27,10 +27,10 @@
 	(get! state [:locations location])
 )
 
-(defn update-one
-	([state location new-data] 		(actions/insert [:locations location] new-data))
+(defn update-one ([location new-data] 		
+	(actions/insert [:locations location] new-data))
 )
 
-(defn delete [state location]
+(defn delete [location]
 	(actions/delete [:locations location])	
 )
