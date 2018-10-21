@@ -4,7 +4,7 @@
             [asgnx.kvstore :as kvstore
 			 :refer [put! get! list! remove!]]
 
-			[asgnx.dining_locations :refer [dining-locations]]
+			[asgnx.locations :refer [dining-locations]]
 
 			[asgnx.commands.wait :as wait]
 			[asgnx.commands.register :as register]
@@ -12,22 +12,6 @@
 			[asgnx.commands.report :as report]
 	)
 )
-
-
-;; Do not edit!
-;; A def for the course home page URL.
-(def cs4278-brightspace "https://brightspace.vanderbilt.edu/d2l/home/85892")
-
-
-;; Do not edit!
-;; A map specifying the instructor's office hours that is keyed by day of the week.
-(def instructor-hours {"tuesday"  {:start    8
-                                   :end      10
-                                   :location "the chairs outside of the Wondry"}
-
-                       "thursday" {:start    8
-                                   :end      10
-                                   :location "the chairs outside of the Wondry"}})
 
 
 ;; This is a helper function that you might want to use to implement
