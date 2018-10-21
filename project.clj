@@ -13,7 +13,8 @@
                             :exclusions [org.clojure/tools.reader
                                          org.clojure/clojurescript
                                          org.clojure/clojure
-                                         org.clojure/core.async]]]
+                                         org.clojure/core.async]]
+							]
 
             ;; Serverless
             :cljs-lambda {:cljs-build-id "lambda"

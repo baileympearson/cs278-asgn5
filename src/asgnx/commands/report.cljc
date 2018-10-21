@@ -53,7 +53,7 @@
 			; did the user give a valid time?
 			(= false (validate-time time)) [[] (str "Invalid time.  Must specify a time in minutes between 0 and " max-wait-time)]
 
-			:else [[(estimation/add-wait location (read-string time))] "Successfully recorded wait time. Thanks :)"]
+			:else [[(estimation/add-wait state location (read-string time))] "Successfully recorded wait time. Thanks :)"]
 
 			)
 		)

@@ -6,9 +6,9 @@
 
 				{
 					:locations { 
-						:pub [
+						:pub 
 							{ date [ wait times] } ...
-						] 
+
 						(all dining locations here)
 					}
 				}
@@ -19,14 +19,13 @@
 		Each day, the wait times are cleared for each dining location.
 	"
   	(:require [clojure.string :as string]
-			[asgnx.kvstore :as kvstore]
-			[asgnx.locations :refer [dining-locations]]
-	)
+             [asgnx.kvstore :as kvstore]
+             [asgnx.locations :refer [dining-locations]])
 )
 
 
-(defn add-wait [location wait]
-	)
+(defn add-wait [state location wait]
+)
 
 (defn get-wait-loc [location]
 	)
