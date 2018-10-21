@@ -11,6 +11,19 @@
 	)
 )
 
+(def dining-locations
+	[
+		"rand"
+		"ebronson"
+		"commons"
+		"grins"
+		"2301"
+		"pub"
+		"frothy"
+	]
+)
+
+
 ;; Do not edit!
 ;; A def for the course home page URL.
 (def cs4278-brightspace "https://brightspace.vanderbilt.edu/d2l/home/85892")
