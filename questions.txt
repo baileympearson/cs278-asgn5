@@ -1,0 +1,1 @@
+Should we account for duplicate regestration of an expert on a topic?
