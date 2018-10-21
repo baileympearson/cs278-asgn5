@@ -4,7 +4,3 @@
 			[asgnx.estimation :as estimation]
 ))
 
-
-(defn wait-hello-world []
-	(println "hello world from wait module")
-		)

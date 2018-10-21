@@ -6,6 +6,8 @@
 
 			[asgnx.locations :refer [dining-locations]]
 
+			[asgnx.parser :as parser]
+
 			[asgnx.commands.wait :as wait]
 			[asgnx.commands.register :as register]
 			[asgnx.commands.unregister :as unregister]
@@ -13,80 +15,6 @@
 	)
 )
 
-
-;; This is a helper function that you might want to use to implement
-;; `cmd` and `args`.
-(defn words [msg]
-  	(if msg
-    	(string/split msg #" ")
-		[]
-	)
-)
-
-;; Asgn 1.
-;;
-;; @Todo: Fill in this function to return the first word in a text
-;; message.
-;;
-;; Example: (cmd "foo bar") => "foo"
-;;
-;; See the cmd-test in test/asgnx/core_test.clj for the
-;; complete specification.
-;;
-(defn cmd [msg]
-	(get (words msg) 0)
-)
-
-;; Asgn 1.
-;;
-;; @Todo: Fill in this function to return the list of words following
-;; the command in a text message.
-;;
-;; Example: (args "foo bar baz") => ("bar" "baz")
-;;
-;; See the args-test in test/asgnx/core_test.clj for the
-;; complete specification.
-;;
-(defn args [msg]
-	(vec (rest (words msg)))
-)
-
-;; Asgn 1.
-;;
-;; @Todo: Fill in this function to return a map with keys for the
-;; :cmd and :args parsed from the msg.
-;;
-;; Example:
-;;
-;; (parsed-msg "foo bar baz") => {:cmd "foo" :args ["bar" "baz"]}
-;;
-;; See the parsed-msg-test in test/asgnx/core_test.clj for the
-;; complete specification.
-;;
-(defn parsed-msg [msg]
-	{	
-		:cmd (cmd msg), 
-		:args (args msg)
-	}
-)
-
-;; Asgn 1.
-;;
-;; @Todo: Fill in this function to prefix the first of the args
-;; in a parsed message with "Welcome " and return the result.
-;;
-;; Example:
-;;
-;; (welcome {:cmd "welcome" :args ["foo"]}) => "Welcome foo"
-;;
-;; See the welcome-test in test/asgnx/core_test.clj for the
-;; complete specification.
-;;
-(defn welcome [pmsg]
-	(let [name (get (:args pmsg) 0)]
-		(str "Welcome " name)
-	)
-)
 
 ;; Asgn 2.
 ;;
@@ -579,7 +507,7 @@
 	(println "  Processing:\"" msg "\" from" src)
     (let [rtr    (create-router routes)
           _      (println "  Router:" rtr)
-          pmsg   (assoc (parsed-msg msg) :user-id src)
+          pmsg   (assoc (parser/parsed-msg msg) :user-id src)
           _      (println "  Parsed msg:" pmsg)
           state  (<! (read-state state-mgr pmsg))
           _      (println "  Read state:" state)

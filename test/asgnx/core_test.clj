@@ -4,58 +4,52 @@
             [clojure.spec.alpha :as s]
             [clojure.spec.test.alpha :as stest]
             [clojure.test.check.generators :as gen]
-            [asgnx.core :refer :all]
+			[asgnx.core :refer :all]
+			[asgnx.parser :as parser]
             [asgnx.kvstore :as kvstore :refer [put! get!]]))
 
 
 
 (deftest words-test
   (testing "that sentences can be split into their constituent words"
-    (is (= ["a" "b" "c"] (words "a b c")))
-    (is (= [] (words "   ")))
-    (is (= [] (words nil)))
-    (is (= ["a"] (words "a")))
-    (is (= ["a"] (words "a ")))
-    (is (= ["a" "b"] (words "a b")))))
+    (is (= ["a" "b" "c"] (parser/words "a b c")))
+    (is (= [] (parser/words "   ")))
+    (is (= [] (parser/words nil)))
+    (is (= ["a"] (parser/words "a")))
+    (is (= ["a"] (parser/words "a ")))
+    (is (= ["a" "b"] (parser/words "a b")))))
 
 
 (deftest cmd-test
   (testing "that commands can be parsed from text messages"
-    (is (= "foo" (cmd "foo")))
-    (is (= "foo" (cmd "foo x y")))
-    (is (= nil   (cmd nil)))
-    (is (= ""    (cmd "")))))
+    (is (= "foo" (parser/cmd "foo")))
+    (is (= "foo" (parser/cmd "foo x y")))
+    (is (= nil   (parser/cmd nil)))
+    (is (= ""    (parser/cmd "")))))
 
 
 (deftest args-test
   (testing "that arguments can be parsed from text messages"
-    (is (= ["x" "y"] (args "foo x y")))
-    (is (= ["x"] (args "foo x")))
-    (is (= [] (args "foo")))
-    (is (= [] (args nil)))))
+    (is (= ["x" "y"] (parser/args "foo x y")))
+    (is (= ["x"] (parser/args "foo x")))
+    (is (= [] (parser/args "foo")))
+    (is (= [] (parser/args nil)))))
 
 
 (deftest parsed-msg-test
   (testing "that text messages can be parsed into cmd/args data structures"
     (is (= {:cmd "foo"
             :args ["x" "y"]}
-           (parsed-msg "foo x y")))
+           (parser/parsed-msg "foo x y")))
     (is (= {:cmd "foo"
             :args ["x"]}
-           (parsed-msg "foo x")))
+           (parser/parsed-msg "foo x")))
     (is (= {:cmd "foo"
             :args []}
-           (parsed-msg "foo")))
+           (parser/parsed-msg "foo")))
     (is (= {:cmd "foo"
             :args ["x" "y" "z" "somereallylongthing"]}
-           (parsed-msg "foo x y z somereallylongthing")))))
-
-(deftest welcome-test
-  (testing "that welcome messages are correctly formatted"
-    (is (= "Welcome bob" (welcome {:cmd "welcome" :args ["bob"]})))
-    (is (= "Welcome bob" (welcome {:cmd "welcome" :args ["bob" "smith"]})))
-    (is (= "Welcome bob smith jr" (welcome {:cmd "welcome" :args ["bob smith jr"]})))))
-
+           (parser/parsed-msg "foo x y z somereallylongthing")))))
 
 
 
