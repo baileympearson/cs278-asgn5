@@ -41,4 +41,3 @@ functions:
 plugins:
   - serverless-cljs-plugin
   - serverless-secrets
-  - serverless-offline
