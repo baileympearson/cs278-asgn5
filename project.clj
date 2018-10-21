@@ -36,7 +36,7 @@
                       [com.jakemccrary/lein-test-refresh "0.22.0"]]
 
             :test-refresh {:refresh-dirs ["src" "test"]
-                           :report       autograder.reporter/report}
+                           }
 
             :target-path "target/%s"
 
