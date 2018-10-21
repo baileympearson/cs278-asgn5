@@ -14,6 +14,7 @@
 			[asgnx.commands.register :as register]
 			[asgnx.commands.unregister :as unregister]
 			[asgnx.commands.report :as report]
+
 			[asgnx.models.locations :as locations]
 			[asgnx.models.users :as users]
 	)
@@ -310,26 +311,21 @@
 	}
 )
 
+(defn get-locations [state-mgr pmsg]
+	(locations/get-all state-mgr)
+)
 
-
-;; Don't edit!
-(defn experts-on-topic-query [state-mgr pmsg]
-  (let [[topic]  (:args pmsg)]
-    (list! state-mgr [:expert topic])))
-
-
-;; Don't edit!
-(defn conversations-for-user-query [state-mgr pmsg]
-  (let [user-id (:user-id pmsg)]
-    (get! state-mgr [:conversations user-id])))
-
+(defn get-users [state-mgr pmsg]
+	(users/get-all state-mgr)
+)
 
 ;; Don't edit!
 (def queries
 	{
-		"expert" experts-on-topic-query
-   		"ask"    experts-on-topic-query
-		"answer" conversations-for-user-query
+		"wait"		get-locations
+		"report" 	get-locations
+		"register" 	get-users
+		"unregister" get-users
 	}
 )
 
