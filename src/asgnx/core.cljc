@@ -4,23 +4,13 @@
             [asgnx.kvstore :as kvstore
 			 :refer [put! get! list! remove!]]
 
+			[asgnx.dining_locations :refer [dining-locations]]
+
 			[asgnx.commands.wait :as wait]
 			[asgnx.commands.register :as register]
 			[asgnx.commands.unregister :as unregister]
 			[asgnx.commands.report :as report]
 	)
-)
-
-(def dining-locations
-	[
-		"rand"
-		"ebronson"
-		"commons"
-		"grins"
-		"2301"
-		"pub"
-		"frothy"
-	]
 )
 
 
