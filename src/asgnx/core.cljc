@@ -407,7 +407,6 @@
 
 
 (defn ask-experts [experts {:keys [args user-id]}]
-	(println "&&&&&&&&&&&&&&&&&&&&&" experts)
 	(let 
 		[
 			; parse the input message
@@ -425,8 +424,6 @@
 		)
 	)
 )
-
-(action-inserts [:conversations] ["bailey", "keaton"] {:user "5037087892" :msg "hello world"})
 
 
 ;; Asgn 3.
@@ -550,23 +547,16 @@
     [[] (apply f args)]))
 
 
-(def routes {
-			"default"  (stateless (fn [& args] "Unknown command."))
-            "welcome"  (stateless welcome)
-            "homepage" (stateless homepage)
-			"office"   (stateless office-hours)
-			"expert" 	add-expert
-			"ask" 		ask-experts
-			"answer" 	answer-question
-			}
+;; Here are the routes I defined for the program
+(def routes 
+	{
+		"default"  (stateless (fn [& args] "Unknown command."))
+		; "wait" 		
+		; "report"
+		; "register" 
+		; "unregister" 
+	}
 )
-;; Asgn 3.
-;;
-;; @Todo: Add mappings of the cmds "expert", "ask", and "answer" to
-;; to the `routes` map so that the functions that you
-;; created will be invoked when the corresponding text message
-;; commands are received.
-;;})
 
 
 
@@ -698,6 +688,6 @@
           arslt  (<! (process-actions system as))
           _      (println "  Action results:" arslt)]
       (println "=========================================")
-	  o
+	  o		;; here we return the object o.
 	  
 	  )))
