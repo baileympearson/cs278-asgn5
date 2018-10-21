@@ -7,7 +7,7 @@
 				{
 					:locations { 
 						:pub [
-							{ :date _____ :wait _____ } ...
+							{ date [ wait times] } ...
 						] 
 						(all dining locations here)
 					}

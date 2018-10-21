@@ -314,8 +314,15 @@
 	}
 )
 
-(defn get-locations [state-mgr pmsg]
+(defn get-all-locations [state-mgr pmsg]
 	(locations/get-all state-mgr)
+)
+
+(defn get-location [state-mgr pmsg]
+	(let [ 	args (:args pmsg)
+			location (get args 0)]
+		(locations/get-one state-mgr location)
+	)
 )
 
 (defn get-all-users [state-mgr pmsg]
@@ -329,8 +336,8 @@
 ;; Don't edit!
 (def queries
 	{
-		"wait"			get-locations
-		"report" 		get-locations
+		"wait"			get-all-locations
+		"report" 		get-location
 		"register" 		get-all-users
 		"unregister" 	get-user
 	}
