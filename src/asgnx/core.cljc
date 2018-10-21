@@ -300,13 +300,13 @@
     [[] (apply f args)]))
 
 (def help-str
-	"Valid commands are:\nwait - lists wait times\nreport - allows user to report wait time\nregister - registers a new user\nunregister - unregisters a user. cannot be undone"
+	"Invalid command.\n\nwait - lists wait times\nreport - reports wait time\nregister - registers a new user\nunregister - unregisters a user (PERMANANT)"
 )
 
 ;; Here are the routes I defined for the program
 (def routes 
 	{
-		"default"  		(stateless (fn [& args] (string/join "Invalid commands.\n" help-str)))
+		"default"  		(stateless (fn [& args] help-str))
 		"wait" 			wait/handler	
 		"report"		report/handler
 		"register" 		register/handler
