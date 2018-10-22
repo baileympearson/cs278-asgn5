@@ -11,7 +11,8 @@
 		}
 	"
 	(:require 
-            [asgnx.kvstore :as kvstore :refer [put! get! list! remove!]]
+            [asgnx.kvstore :as kvstore
+			 :refer [put! get! list! remove!]]
 			[asgnx.actions :as actions]
 	)
 )
@@ -27,7 +28,7 @@
 )
 
 (defn update-one ([location new-data] 		
-	(actions/insert [:locations location] new-data))
+	(actions/insert [:locations (keyword location)] new-data))
 )
 
 (defn delete [location]

@@ -8,6 +8,7 @@
 			[asgnx.parser :as parser]
 			[asgnx.kvstore :as kvstore :refer [put! get!]]
 			[asgnx.actions :as actions]
+			[asgnx.commands.report :as report]
 	)
 )
 
@@ -140,15 +141,114 @@
 (def send-action-handlers
   {:send action-send})
 
-; (deftest handle-message-test
-;   (testing "the integration and handling of messages"
-;     (let [ehdlrs (merge
-;                    send-action-handlers
-;                    kvstore/action-handlers)
-;           state  (atom {})
-;           smgr   (kvstore/create state)
-;           system {:state-mgr smgr
-;                   :effect-handlers ehdlrs}]
+(defn print-locations [system]
+	(println "\nRAAAAAAAAAAAAYEEEEEYAAAAAA")
+	(println (<!! (get! (:state-mgr system) [:locations])))
+	(println "RAAAAAAAAAAAAYEEEEEYAAAAAA")
+	)
+(defn get-locations [system]
+		(<!! (get! (:state-mgr system) [:locations]))
+	)
+
+(deftest handle-message-test
+  (testing "the integration and handling of messages"
+    (let [ehdlrs (merge
+                   send-action-handlers
+                   kvstore/action-handlers)
+          state  (atom {})
+          smgr   (kvstore/create state)
+          system {:state-mgr smgr
+				  :effect-handlers ehdlrs}]
+				
+		(is (= "You are not a registered user of this application."
+             (<!! (handle-message
+                    system
+                    "test-user"
+					"unregister"))))
+		
+
+		(is (= "No wait times have been reported."
+             (<!! (handle-message
+                    system
+                    "test-user"
+					"wait"))))
+
+		(is (= "usage: report <location> <time in minutes>"
+             (<!! (handle-message
+                    system
+                    "test-user"
+					"report"))))
+
+		(is (= "usage: report <location> <time in minutes>"
+             (<!! (handle-message
+                    system
+                    "test-user"
+					"report rand"))))
+
+		(is (= report/invalid-location-msg
+             (<!! (handle-message
+                    system
+                    "test-user"
+					"report banana 15"))))
+		
+		(is (= "Successfully recorded wait time. Thanks :)"
+             (<!! (handle-message
+                    system
+                    "test-user"
+					"report rand 15"))))
+
+		(is (= (get-locations system)
+				{:rand 15}
+			))
+
+		(is (= "Successfully recorded wait time. Thanks :)"
+             (<!! (handle-message
+                    system
+                    "test-user"
+					"report rand 20"))))
+
+		(is (= (get-locations system)
+				{:rand 20}
+			))
+
+		(is (= "Successfully recorded wait time. Thanks :)"
+             (<!! (handle-message
+                    system
+                    "test-user"
+					"report pub 20"))))
+
+		(is (= (get-locations system)
+				{:rand 20 :pub 20}
+			))
+
+		(is (= "rand: 20min\npub: 20min"
+             (<!! (handle-message
+                    system
+                    "test-user"
+					"wait"))))
+
+		(is (= "Successfully recorded wait time. Thanks :)"
+             (<!! (handle-message
+                    system
+                    "test-user"
+					"report grins 15"))))
+
+		(is (= (get-locations system)
+				{:rand 20 :pub 20 :grins 15}
+			))
+
+		(is (= "rand: 20min\npub: 20min\ngrins: 15min"
+             (<!! (handle-message
+                    system
+                    "test-user"
+					"wait"))))
+
+		(print-locations system)
+
+	)
+	)
+)
+
 ;       (is (= "There are no experts on that topic."
 ;              (<!! (handle-message
 ;                     system
@@ -214,4 +314,3 @@
 ;                    system
 ;                    "test-user3"
 ; 				   "answer the blue bus"))))
-; )))

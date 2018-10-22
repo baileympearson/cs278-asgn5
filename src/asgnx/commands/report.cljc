@@ -33,9 +33,16 @@
 	)
 )
 
+(defn member?
+	"I'm still amazed that Clojure does not provide a simple member function.
+	 Returns true if `item` is a member of `series`, else nil."
+	[series item]
+	(println "ASDFASDFASDF" series)
+	(and (some #(= item %) series) true))
+
 (defn handler [state pmsg]
 	(let 
-		[	args (:cmd pmsg)
+		[	args (:args pmsg)
 			location (get args 0)
 			time (get args 1)]
 
@@ -48,7 +55,7 @@
 			(= (count args) 1) [[] "usage: report <location> <time in minutes>"]
 
 			; did the user send a location that doesn't exist?
-			(nil? state) [[] invalid-location-msg]
+			(not (member? dining-locations/dining-locations location)) [[] invalid-location-msg]
 
 			; did the user give a valid time?
 			(= false (validate-time time)) [[] (str "Invalid time.  Must specify a time in minutes between 0 and " max-wait-time)]

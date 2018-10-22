@@ -1,9 +1,48 @@
 (ns asgnx.commands.register 
   (:require [clojure.string :as string]
-            [asgnx.kvstore :as kvstore]
+			[asgnx.kvstore :as kvstore]
+			[asgnx.models.users :as users]
   )
 )
 
+(def new-user
+	{
+		:status :choosing-location
+	}
+)
+
+(defn begin-registration [state pmsg]
+	(let [usr (:user-id pmsg)]
+		(println "############ BEGINNING REGISTRATION" usr)
+		[[(users/insert usr new-user)] "Choose which dining locations to receive updates about:"]
+	)
+)
+
+(defn choose-locations [state pmsg]
+	[[] "choosing locations"]
+)
+
+(defn choose-times [state pmsg]
+	[[] "choosing times"]
+)
+
 (defn handler [state pmsg]
-	[[] "hello from handler"]
+	(cond 
+		;; if the state is nil, there is not a user for the
+		;; current number
+		(nil? state) (begin-registration state pmsg)
+
+		;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+		;; either they have already registered, or they are in the process of registering
+		;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+		;; let's check if the user is alreay registered - if they are, we do nothing
+		(= (:status state) :registered) 			[[] "You are already registered."]
+
+		(= (:status state) :choosing-location) 		(choose-locations state pmsg)
+
+		(= (:status state) :choosing-times) 		(choose-times state pmsg)
+
+		:else [[] "You should not see this message :("]
+	)
 )

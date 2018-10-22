@@ -6,6 +6,7 @@
 
             [asgnx.actions :as actions]
 
+            [clojure.core.async :refer [<!!]]
 			[asgnx.locations :refer [dining-locations]]
 
 			[asgnx.parser :as parser]
@@ -18,6 +19,18 @@
 			[asgnx.models.locations :as locations]
 			[asgnx.models.users :as users]
 	)
+)
+
+(def initial-locations 
+	{
+		:rand			nil
+		:ebronson		nil
+		:commons		nil
+		:grins			nil
+		:2301			nil
+		:pub			nil
+		:frothy			nil
+	}
 )
 
 
@@ -338,7 +351,7 @@
 	{
 		"wait"			get-all-locations
 		"report" 		get-location
-		"register" 		get-all-users
+		"register" 		get-user
 		"unregister" 	get-user
 	}
 )
@@ -411,7 +424,32 @@
       (doseq [action actions]
         (let [result (<! (invoke system action))]
           (swap! results conj result)))
-      @results)))
+	  @results)))
+	
+(def init 0)
+
+(defn init-state [system]
+	(println "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Initializing state")
+	(let [init-actions [(actions/insert [:locations] initial-locations) ]
+			init-users [(actions/insert [:users] {})]]
+		(inc init)
+  		(go
+          (<! (process-actions system init-actions))
+          (<! (process-actions system init-users))
+		)
+	)
+)
+
+(defn load-initial-state [system]
+	(let [state-mgr (:state-mgr system)
+			cur-state (<!! (get! state-mgr [:locations]))]
+			(println "################" cur-state)
+		(if (nil? cur-state)
+			(init-state system)
+			cur-state
+		)
+	)
+)
 
 
 ;; Don't edit!
@@ -440,19 +478,20 @@
   (go
     (println "=========================================")
 	(println "  Processing:\"" msg "\" from" src)
-    (let [rtr    (create-router routes)
-          _      (println "  Router:" rtr)
-          pmsg   (assoc (parser/parsed-msg msg) :user-id src)
-          _      (println "  Parsed msg:" pmsg)
-          state  (<! (read-state state-mgr pmsg))
-          _      (println "  Read state:" state)
-          hdlr   (rtr pmsg)
-          _      (println "  Hdlr:" hdlr)
-          [as o] (hdlr state pmsg)
-		  _      (println "  Hdlr result:" [as o])
-          arslt  (<! (process-actions system as))
-          _      (println "  Action results:" arslt)]
+    (let [
+		rtr    		(create-router routes)
+        _      		(println "  Router:" rtr)
+        pmsg   		(assoc (parser/parsed-msg msg) :user-id src)
+        _      		(println "  Parsed msg:" pmsg)
+        state  		(<! (read-state state-mgr pmsg))
+        _      		(println "  Read state:" state)
+        hdlr   		(rtr pmsg)
+        _      		(println "  Hdlr:" hdlr)
+        [as o] 		(hdlr state pmsg)
+		_      		(println "  Hdlr result:" [as o])
+        arslt  		(<! (process-actions system as))
+        _      		(println "  Action results:" arslt)]
       (println "=========================================")
-	  o		;; here we return the object o.
+	  o		
 	  
 	  )))
