@@ -2,6 +2,7 @@
   (:require [clojure.string :as string]
 			[asgnx.kvstore :as kvstore]
 			[asgnx.models.users :as users]
+			[asgnx.locations :as dining-locations]
   )
 )
 
@@ -12,9 +13,9 @@
 )
 
 (defn begin-registration [state pmsg]
-	(let [usr (:user-id pmsg)]
-		(println "############ BEGINNING REGISTRATION" usr)
-		[[(users/insert usr new-user)] "Choose which dining locations to receive updates about:"]
+	(let [usr (:user-id pmsg)
+		msg-str (string/join "\n" ["Choose which dining locations to receive updates about:\n" (dining-locations/loc-str)])]
+		[[(users/insert usr new-user)] msg-str]
 	)
 )
 
