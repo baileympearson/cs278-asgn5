@@ -38,6 +38,11 @@ functions:
           path: msg
           method: post
 
+  hello-world-lambda:
+    cljs: asgnx.lambda/hello-world-lambda
+    events:
+      - schedule: cron(0/2 * * * ? *)
+
 plugins:
   - serverless-cljs-plugin
   - serverless-secrets

@@ -87,5 +87,17 @@
 (defgateway receive-message [event ctx]
   (handle-message event ctx))
 
+(defgateway hello-world-lambda [event ctx]
+	(let 
+		[	today (new js/Date)
+			tmp 	(new js/Date)
+			later (new js/Date (.setHours tmp 20))]
+		(println "***************************")
+		(println "now: " (.toString today))
+		(println "later: " (.toString later))
+		(println "***************************")
+	)
+)
+
 (defn node-repl []
   (println "Node repl up!"))

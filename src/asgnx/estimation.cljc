@@ -20,21 +20,25 @@
 	"
   	(:require [clojure.string :as string]
              [asgnx.kvstore :as kvstore]
-             [asgnx.locations :refer [dining-locations]])
+             [asgnx.locations :refer [dining-locations]]
+			 [asgnx.date :as date]
+				[asgnx.models.locations :as locations]
+				[asgnx.actions :as actions]
+         			 )
 )
 
 
 (defn add-wait [state location wait]
+	(locations/update-one location wait)
 )
 
-(defn get-wait-loc [location]
+(defn get-wait-loc [state location]
 	)
 
-(defn get-wait []
+(defn get-wait [state]
 	)
 
-(defn update-wait-loc [location]
-	)
-
+;; update-wait
+;; @brief resets all the wait times to zero.
 (defn update-wait []
 	)

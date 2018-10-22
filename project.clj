@@ -14,7 +14,9 @@
                                          org.clojure/clojurescript
                                          org.clojure/clojure
                                          org.clojure/core.async]]
-							]
+                           [clj-time "0.15.0"]
+                           [cljsjs/date-fns "1.29.0-0"]
+                           ]
 
             ;; Serverless
             :cljs-lambda {:cljs-build-id "lambda"
@@ -25,7 +27,8 @@
                                  [serverless-secrets "3.0.0-beta.12"]
                                  [source-map-support "0.5.7"]
                                  [aws-sdk "2.289.0"]
-                                 [bignumber.js "7.2.1"]]}
+								 [bignumber.js "7.2.1"]
+                        								 ]}
 
             :source-paths ["src"]
             :test-paths ["test"]

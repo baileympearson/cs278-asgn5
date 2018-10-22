@@ -14,7 +14,7 @@
 (deftest validate-time-test
   	(testing "testing report/validate-time"
 		(is (= nil (report/validate-time "")))
-		(is (= 3 (report/validate-time "3")))
+		(is (= 15 (report/validate-time "15")))
 		(is (= 33 (report/validate-time "33")))
 		(is (= nil (report/validate-time "333")))
 

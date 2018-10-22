@@ -12,7 +12,6 @@
 )
 
 
-
 (deftest words-test
   (testing "that sentences can be split into their constituent words"
     (is (= ["a" "b" "c"] (parser/words "a b c")))
