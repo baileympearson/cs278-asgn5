@@ -20,21 +20,26 @@
 	"
   	(:require [clojure.string :as string]
              [asgnx.kvstore :as kvstore]
-             [asgnx.locations :refer [dining-locations]])
+			 [asgnx.locations :refer [dining-locations]]
+			[asgnx.models.locations :as locations]
+	  )
 )
 
 
 (defn add-wait [state location wait]
+	(locations/update-one location wait)
 )
 
-(defn get-wait-loc [location]
-	)
+(defn get-wait-loc [state location]
+	((keyword location) state)
+)
 
-(defn get-wait []
-	)
+(defn get-wait [state]
+	state
+)
 
 (defn update-wait-loc [location]
-	)
+)
 
 (defn update-wait []
-	)
+)

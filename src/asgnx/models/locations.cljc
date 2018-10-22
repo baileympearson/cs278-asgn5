@@ -11,8 +11,7 @@
 		}
 	"
 	(:require 
-            [asgnx.kvstore :as kvstore
-			 :refer [put! get! list! remove!]]
+            [asgnx.kvstore :as kvstore :refer [put! get! list! remove!]]
 			[asgnx.actions :as actions]
 	)
 )
