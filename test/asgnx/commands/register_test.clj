@@ -51,7 +51,7 @@
           system {:state-mgr smgr
 				  :effect-handlers ehdlrs}]
 				
-		(is (= "You are not a registered user of this application."
+		(is (= "Choose which dining locations to receive updates about:\n\nrand\nebronson\ncommons\ngrins\n2301\npub\nfrothy"
              (<!! (handle-message
                     system
                     "test-user"
