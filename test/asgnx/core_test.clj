@@ -220,11 +220,11 @@
 				{"rand" 20 "pub" 20}
 			))
 
-		(is (= "rand: 20min\npub: 20min"
+		(is (= "The wait at rand is 20min."
              (<!! (handle-message
                     system
                     "test-user"
-					"wait"))))
+					"wait rand"))))
 
 		(is (= "Successfully recorded wait time. Thanks :)"
              (<!! (handle-message
@@ -236,17 +236,17 @@
 				{"rand" 20 "pub" 20 "grins" 15}
 			))
 
-		(is (= "rand: 20min\npub: 20min\ngrins: 15min"
+		(is (= "The wait at pub is 20min."
              (<!! (handle-message
                     system
                     "test-user"
-					"wait"))))
+					"wait pub"))))
 
 		(is (= "rand: 20min\npub: 20min\ngrins: 15min"
              (<!! (handle-message
                     system
                     "test-user"
-					"wait"))))
+					"wait 20"))))
 
 		(is (= "Valid Commands:\n  register\n  unregister\n  wait <location>\n  report <location> <time>"
              (<!! (handle-message

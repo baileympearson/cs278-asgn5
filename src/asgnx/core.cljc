@@ -61,13 +61,6 @@
 
 
 (defn get-location [state-mgr pmsg]
-	; (let [ 	args (:args pmsg)
-	; 		location (get args 0)]
-	; 	(if (nil? location)
-	; 		nil
-	; 		(locations/get-one state-mgr location)
-	; 	)
-	; )
 	(locations/get-one state-mgr (first (:args pmsg)))
 )
 
@@ -82,7 +75,7 @@
 ;; Don't edit!
 (def queries
 	{
-		"wait"			get-all-locations
+		"wait"			get-location
 		"report" 		get-location
 		"register" 		get-user
 		"unregister" 	get-user

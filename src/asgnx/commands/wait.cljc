@@ -23,12 +23,18 @@
 	)
 )
 
-(defn handler [state pmsg]
-	(println "PMSG" pmsg)
-	(if (nil? state)
-		[[] "No wait times have been reported."]
+(defn loc-to-string [loc time]
+	(str "The wait at " loc " is " time "min.")
+)
 
-		;; at this point, we know for sure that the user has registered at some point
-		[[] (locations-to-string state)]
+(defn handler [time pmsg]
+	(let [ 	args 	(:args pmsg)
+			loc 	(first args)	]
+		(if (nil? time)
+			[[] "No wait times have been reported."]
+
+			;; at this point, we know for sure that the user has registered at some point
+			[[] (loc-to-string loc time)]
+		)
 	)
 )
