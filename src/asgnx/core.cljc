@@ -54,8 +54,7 @@
 )
 
 (defn get-all-locations [state-mgr pmsg]
-	(list! state-mgr [:locations])
-	; (locations/get-all state-mgr)
+	(locations/get-all state-mgr)
 )
 
 
