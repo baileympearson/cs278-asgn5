@@ -106,6 +106,18 @@
 				{	"test-user" 	{ :status :choosing-times :location-preferences [:rand :frothy]}
 					"test-user2" 	{ :status :choosing-location }}
 			))
+
+		;; register another user at the same time
+		(is (= "Successfully unregistered. Goodbye :("
+             (<!! (handle-message
+                    system
+                    "test-user2"
+					"unregister"))))
+
+		(is (= (get-users system)
+				{	"test-user" 	{ :status :choosing-times :location-preferences [:rand :frothy]}}
+			))
+
 		
 		(print-users system)
 

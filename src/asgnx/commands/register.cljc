@@ -42,7 +42,6 @@
 			user-id (:user-id pmsg)	
 			msg 	(str "Selected: " (string/join "\n" locations) "\nEnter the time of day you want to be notified")]
 
-		(println "$$$$$$$$$$$$$$$$$$$$$$$$$$$$ \n\n" (count locations))
 		(if (= 0 (count locations))
 			[[] "You must choose at least one valid dining location."]
 			[[(users/update-one user-id new-status)] msg]
