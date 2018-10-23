@@ -52,8 +52,14 @@ ignored by the program.
 ### Choosing times
 You will next be prompted to choose the times to be notified at.  You must respond with a list of 5 times, corresponding
 to Monday-Friday.
+
 ```
-	register 11:00 10:00 12:15 1:10 2:08
+register <time monday> <time tuesday> ... <time friday>
+```
+
+For example:
+```
+register 11:00 10:00 12:15 1:10 2:08
 ```
 
 You will then be successfully registered!  You can unregister at any time.
@@ -69,7 +75,7 @@ This command allows the user to report a wait time for a particular dining locat
 does not need to be registered to report wait times.
 
 ```
-	wait <dining locaiton> <time in minutes>
+wait <dining locaiton> <time in minutes>
 ```
 
 If a dining location is specified that does not exist, the input will be ignored.
@@ -78,5 +84,5 @@ If a dining location is specified that does not exist, the input will be ignored
 This command reports the wait time at a particular dining location. The syntax is:
 
 ```
-	wait <dining location>
+wait <dining location>
 ```
