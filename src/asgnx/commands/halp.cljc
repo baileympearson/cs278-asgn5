@@ -9,6 +9,7 @@
 		[] 
 		(string/join "\n" [
 			"Valid Commands:"
+			"  halp"
 			"  register"
 			"  unregister"
 			"  wait <location>"

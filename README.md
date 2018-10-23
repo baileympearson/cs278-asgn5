@@ -86,3 +86,10 @@ This command reports the wait time at a particular dining location. The syntax i
 ```
 wait <dining location>
 ```
+
+## halp
+This command gives you the syntax for all 5 commands.  Why halp? Twilio intercepts containing only 'help'.
+
+```
+halp
+```
