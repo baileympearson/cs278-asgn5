@@ -70,8 +70,7 @@
 )
 
 (defn get-all-users [state-mgr pmsg]
-	; (users/get-all state-mgr)
-	(get! state-mgr [:locations "pub"])
+	(users/get-all state-mgr)
 )
 
 (defn get-user [state-mgr pmsg]

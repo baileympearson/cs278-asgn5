@@ -19,10 +19,6 @@
 ;; maximum wait time in minutes
 (def max-wait-time 60)
 
-<<<<<<< HEAD
-
-=======
->>>>>>> dev
 (defn str->int [s]
 	#?(:clj  (java.lang.Integer/parseInt s)
 	   :cljs (js/parseInt s)))
@@ -34,11 +30,7 @@
 		]
 		(if (nil? match)
 			nil
-<<<<<<< HEAD
-			(if (not (<= (str->int match) max-wait-time))
-=======
 			(if (> (str->int match) max-wait-time)
->>>>>>> dev
 				nil
 				(str->int match)
 			)
@@ -69,13 +61,8 @@
 			; was there only a location?
 			(= (count args) 1) [[] "usage: report <location> <time in minutes>"]
 
-<<<<<<< HEAD
-			; ; did the user send a location that doesn't exist?
-			(locations/validate-location location) [[] invalid-location-msg]
-=======
 			; did the user send a location that doesn't exist?
 			(not (member? dining-locations/dining-locations location)) [[] invalid-location-msg]
->>>>>>> dev
 
 			; did the user give a valid time?
 			(= false (validate-time time)) [[] (str "Invalid time.  Must specify a time in minutes between 0 and " max-wait-time)]
