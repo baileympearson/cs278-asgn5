@@ -27,6 +27,14 @@
 	(get! state [:users user_id])
 )
 
+(defn insert [user-id data]
+	(actions/insert [:users user-id] data)
+)
+
+(defn update-status [user-id status]
+	(actions/insert [:users user-id :status] status)
+	)
+
 (defn update-one
 	([user_id new-data] 		(actions/insert [:users user_id] new-data))
 	([user_id field new-data] (actions/insert [:users user_id field] new-data))

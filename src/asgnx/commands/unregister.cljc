@@ -11,6 +11,6 @@
 		[[] "You are not a registered user of this application."]
 
 		;; at this point, we know for sure that the user has registered at some point
-		[[(users/delete (:user_id pmsg))] "Successfully unregistered. Goodbye :("]
+		[[(users/delete (:user-id pmsg))] "Successfully unregistered. Goodbye :("]
 	)
 )

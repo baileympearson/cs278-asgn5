@@ -1,4 +1,5 @@
 (ns asgnx.locations
+	(:require [clojure.string :as string])
 	)
 
 (def dining-locations
@@ -11,4 +12,8 @@
 		"pub"
 		"frothy"
 	]
+)
+
+(defn loc-str [] 
+	(string/join "\n" dining-locations)
 )

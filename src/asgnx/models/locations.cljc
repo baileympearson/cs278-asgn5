@@ -37,6 +37,7 @@
 )
 
 (defn get-all [state]
+	(println "GETTING STATE")
 	(get! state [:locations])
 )
 
@@ -45,14 +46,8 @@
 	(get! state [:locations location])
 )
 
-(defn update-one [location new-data] 		
-	(actions/insert [:locations (keyword location)] new-data)
-)
-
-(defn update-all [new-data]
-	(let [keys (map #(keyword %) dining-locations/dining-locations)]
-		(actions/inserts [:locations] keys 0)
-	)
+(defn update-one ([location new-data] 		
+	(actions/insert [:locations location] new-data))
 )
 
 (defn delete [location]
