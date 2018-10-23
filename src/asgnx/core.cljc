@@ -17,7 +17,6 @@
 
 			[asgnx.models.locations :as locations]
 			[asgnx.models.users :as users]
-			[asgnx.date :as date]
 	)
 )
 
