@@ -248,7 +248,7 @@
                     "test-user"
 					"wait"))))
 
-		(is (= "Valid Commands:\n\n\n  register\n  unregister\n  wait <location>\n  report <location> <time>"
+		(is (= "Valid Commands:\n  register\n  unregister\n  wait <location>\n  report <location> <time>"
              (<!! (handle-message
                     system
                     "test-user"

@@ -61,13 +61,14 @@
 
 
 (defn get-location [state-mgr pmsg]
-	(let [ 	args (:args pmsg)
-			location (get args 0)]
-		(if (nil? location)
-			nil
-			(locations/get-one state-mgr location)
-		)
-	)
+	; (let [ 	args (:args pmsg)
+	; 		location (get args 0)]
+	; 	(if (nil? location)
+	; 		nil
+	; 		(locations/get-one state-mgr location)
+	; 	)
+	; )
+	(locations/get-one state-mgr (first (:args pmsg)))
 )
 
 (defn get-all-users [state-mgr pmsg]

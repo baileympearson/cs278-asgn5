@@ -24,6 +24,7 @@
 )
 
 (defn handler [state pmsg]
+	(println "PMSG" pmsg)
 	(if (nil? state)
 		[[] "No wait times have been reported."]
 
