@@ -198,7 +198,7 @@
 					"report rand 15"))))
 
 		(is (= (get-locations system)
-				{:rand 15}
+				{"rand" 15}
 			))
 
 		(is (= "Successfully recorded wait time. Thanks :)"
@@ -208,7 +208,7 @@
 					"report rand 20"))))
 
 		(is (= (get-locations system)
-				{:rand 20}
+				{"rand" 20}
 			))
 
 		(is (= "Successfully recorded wait time. Thanks :)"
@@ -218,7 +218,7 @@
 					"report pub 20"))))
 
 		(is (= (get-locations system)
-				{:rand 20 :pub 20}
+				{"rand" 20 "pub" 20}
 			))
 
 		(is (= "rand: 20min\npub: 20min"
@@ -234,8 +234,14 @@
 					"report grins 15"))))
 
 		(is (= (get-locations system)
-				{:rand 20 :pub 20 :grins 15}
+				{"rand" 20 "pub" 20 "grins" 15}
 			))
+
+		(is (= "rand: 20min\npub: 20min\ngrins: 15min"
+             (<!! (handle-message
+                    system
+                    "test-user"
+					"wait"))))
 
 		(is (= "rand: 20min\npub: 20min\ngrins: 15min"
              (<!! (handle-message

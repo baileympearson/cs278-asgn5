@@ -19,15 +19,19 @@
 ;; maximum wait time in minutes
 (def max-wait-time 60)
 
+(defn str->int [s]
+	#?(:clj  (java.lang.Integer/parseInt s)
+	   :cljs (js/parseInt s)))
+
 ;; validate-time
 ;; @brief returns the time represented in 
 (defn validate-time [time]
 	(let [match (re-matches time-regex time)]
 		(if (nil? match)
 			nil
-			(if (> (read-string match) max-wait-time)
+			(if (> (str->int match) max-wait-time)
 				nil
-				(read-string match)
+				(str->int match)
 			)
 		)
 	)
@@ -40,6 +44,10 @@
 	(and (some #(= item %) series) true))
 
 (defn handler [state pmsg]
+	(println "********** IN HANDLER")
+	(println "********** state " state)
+	(println "********** state " pmsg)
+
 	(let 
 		[	args (:args pmsg)
 			location (get args 0)
@@ -59,7 +67,7 @@
 			; did the user give a valid time?
 			(= false (validate-time time)) [[] (str "Invalid time.  Must specify a time in minutes between 0 and " max-wait-time)]
 
-			:else [[(estimation/add-wait state location (read-string time))] "Successfully recorded wait time. Thanks :)"]
+			:else [[(estimation/add-wait state location (str->int time))] "Successfully recorded wait time. Thanks :)"]
 
 			)
 		)

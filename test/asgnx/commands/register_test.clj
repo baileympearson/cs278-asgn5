@@ -91,7 +91,7 @@
 					"register rand frothy"))))
 
 		(is (= (get-users system)
-				{	"test-user" 	{ :status :choosing-times :location-preferences [:rand :frothy]}
+				{	"test-user" 	{ :status :choosing-times :location-preferences ["rand" "frothy"]}
 					"test-user2" 	{ :status :choosing-location }}
 			))
 
@@ -103,7 +103,7 @@
 					"register banana"))))
 
 		(is (= (get-users system)
-				{	"test-user" 	{ :status :choosing-times :location-preferences [:rand :frothy]}
+				{	"test-user" 	{ :status :choosing-times :location-preferences ["rand" "frothy"]}
 					"test-user2" 	{ :status :choosing-location }}
 			))
 
@@ -115,7 +115,7 @@
 					"unregister"))))
 
 		(is (= (get-users system)
-				{	"test-user" 	{ :status :choosing-times :location-preferences [:rand :frothy]}}
+				{	"test-user" 	{ :status :choosing-times :location-preferences ["rand" "frothy"]}}
 			))
 
 		;; register another user at the same time
@@ -127,14 +127,28 @@
 
 		(is (= (get-users system)
 				{"test-user" 
-					{:status :choosing-times 
-					:location-preferences [:rand :frothy], 
+					{:status :registered
+					:location-preferences ["rand" "frothy"], 
 					:time-preferences {:mon {:hours 11 :minutes 30} 
 						:tue {:hours 1 :minutes 15} 
 						:wed {:hours 12 :minutes 15} 
 						:thu {:hours 8 :minutes 05} 
 						:fri{:hours 10 :minutes 15}}}}
 			))
+
+		;; register another user at the same time
+		(is (= "Successfully unregistered. Goodbye :("
+             (<!! (handle-message
+                    system
+                    "test-user"
+					"unregister"))))
+
+		;; register another user at the same time
+		(is (= "You are not a registered user of this application."
+             (<!! (handle-message
+                    system
+                    "test-user"
+					"unregister"))))
 
 		
 		(print-users system)

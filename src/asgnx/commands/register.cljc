@@ -37,8 +37,8 @@
 
 (defn choose-locations [state pmsg]
 	(let [ 	locations (filter-locations (:args pmsg))
-			loc-keywords (vec (map keyword locations))
-			new-status 	{ :status :choosing-times :location-preferences loc-keywords}
+			; loc-keywords (vec (map keyword locations))
+			new-status 	{ :status :choosing-times :location-preferences locations}
 			user-id (:user-id pmsg)	
 			msg 	(str "Selected: " (string/join "\n" locations) "\nEnter the time of day you want to be notified")]
 
@@ -74,9 +74,10 @@
 (defn choose-times [state pmsg]
 	(let [	split-times 	(vec (map split-time (:args pmsg))) 
 			time-prefs 		(build-day-map split-times)	
-			user-id 		(:user-id pmsg)		]
-	(println "$$$$$$$$$$$$$$$$$\n\n" time-prefs "\n\n")
-	[[(users/update-one user-id :time-preferences time-prefs)] "Successfully registered."]
+			user-id 		(:user-id pmsg)		
+			new-status 		{ :status :registered :time-preferences time-prefs :location-preferences (:location-preferences state)}
+			]
+	[ [(users/update-one user-id new-status)] "Successfully registered."]
 	)
 )
 

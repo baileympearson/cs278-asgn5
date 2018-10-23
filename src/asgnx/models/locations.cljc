@@ -19,6 +19,7 @@
 
 
 (defn get-all [state]
+	(println "GETTING STATE")
 	(get! state [:locations])
 )
 
@@ -28,7 +29,8 @@
 )
 
 (defn update-one ([location new-data] 		
-	(actions/insert [:locations (keyword location)] new-data))
+	(println "INSERTING : " location " " new-data)
+	(actions/insert [:locations location] new-data))
 )
 
 (defn delete [location]
