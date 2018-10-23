@@ -9,7 +9,17 @@
 			[asgnx.kvstore :as kvstore :refer [put! get!]]
 			[asgnx.actions :as actions]
 			[asgnx.commands.report :as report]
+			[asgnx.commands.register :as register]
 	)
+)
+
+(deftest filter-location-test
+  (testing "only valid locations are filtered out"
+	(is (= '() (register/filter-locations [])))
+	(is (= '("rand") (register/filter-locations ["rand"])))
+	(is (= '("rand" "frothy") (register/filter-locations ["rand" "frothy"])))
+	(is (= '("rand" "frothy") (register/filter-locations ["rand" "frothy" "banana"])))
+  )
 )
 
 (defn action-send [system {:keys [to msg]}]
@@ -56,6 +66,46 @@
                     system
                     "test-user"
 					"register"))))
+
+		(is (= (get-users system)
+				{"test-user" { :status :choosing-location }}
+			))
+
+		;; register another user at the same time
+		(is (= "Choose which dining locations to receive updates about:\n\nrand\nebronson\ncommons\ngrins\n2301\npub\nfrothy"
+             (<!! (handle-message
+                    system
+                    "test-user2"
+					"register"))))
+
+		(is (= (get-users system)
+				{"test-user" { :status :choosing-location }
+					"test-user2" { :status :choosing-location }}
+			))
+
+		;; register another user at the same time
+		(is (= "Selected: rand\nfrothy\nEnter the time of day you want to be notified"
+             (<!! (handle-message
+                    system
+                    "test-user"
+					"register rand frothy"))))
+
+		(is (= (get-users system)
+				{	"test-user" 	{ :status :choosing-times :location-preferences [:rand :frothy]}
+					"test-user2" 	{ :status :choosing-location }}
+			))
+
+		;; register another user at the same time
+		(is (= "You must choose at least one valid dining location."
+             (<!! (handle-message
+                    system
+                    "test-user2"
+					"register banana"))))
+
+		(is (= (get-users system)
+				{	"test-user" 	{ :status :choosing-times :location-preferences [:rand :frothy]}
+					"test-user2" 	{ :status :choosing-location }}
+			))
 		
 		(print-users system)
 

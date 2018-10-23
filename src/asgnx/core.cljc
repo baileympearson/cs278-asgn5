@@ -343,7 +343,7 @@
 )
 
 (defn get-user [state-mgr pmsg]
-	(users/get-one state-mgr (:user_id pmsg))
+	(users/get-one state-mgr (:user-id pmsg))
 )
 
 ;; Don't edit!
