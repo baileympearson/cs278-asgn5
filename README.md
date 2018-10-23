@@ -22,11 +22,11 @@ around main campus.
 There are five valid commands:
 
 ```
-	register
-	unregister
-	wait
-	report
-	halp
+register
+unregister
+wait
+report
+halp
 ```
 
 ## register
@@ -34,7 +34,7 @@ The register commands allows a user to specify their preferred dining locations 
 times to be notified at automatically each day.  The syntax is easy:
 
 ```
-	register
+register
 ```
 
 which will then take you through an interactive process to register for the service.  Each command 
@@ -43,7 +43,7 @@ in the registration process must begin with the word register.
 ### Choosing locations
 You will be prompted to choose which dining locations you prefer.  You must respond in the following format:
 ```
-	register <location1> ... <locationn>
+register <location1> ... <locationn>
 ```
 
 If any of your locations are not a valid campus dining location or if you misspell a location, it will be
@@ -67,7 +67,7 @@ You will then be successfully registered!  You can unregister at any time.
 ## Unregister
 This command unregisters the user from the service.  The syntax is straightforward:
 ```
-	unregister
+unregister
 ```
 
 ## report
