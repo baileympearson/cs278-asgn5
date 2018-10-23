@@ -14,6 +14,7 @@
 			[asgnx.commands.register :as register]
 			[asgnx.commands.unregister :as unregister]
 			[asgnx.commands.report :as report]
+			[asgnx.commands.halp :as halp]
 
 			[asgnx.models.locations :as locations]
 			[asgnx.models.users :as users]
@@ -46,6 +47,7 @@
 (def routes 
 	{
 		"default"  		(stateless (fn [& args] help-str))
+		"halp"			halp/handler
 		"wait" 			wait/handler	
 		"report"		report/handler
 		"register" 		register/handler
