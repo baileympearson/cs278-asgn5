@@ -21,13 +21,13 @@ around main campus.
 # Usage
 There are five valid commands:
 
-'''
+```
 	register
 	unregister
 	wait
 	report
 	halp
-'''
+```
 
 # Questions:
   1. Do you eat on campus for lunch?  If so, where?
