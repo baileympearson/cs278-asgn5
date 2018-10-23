@@ -9,6 +9,7 @@
 			[asgnx.kvstore :as kvstore :refer [put! get!]]
 			[asgnx.actions :as actions]
 			[asgnx.commands.report :as report]
+			[asgnx.helpers :as helpers]
 	)
 )
 
@@ -166,7 +167,7 @@
 					"unregister"))))
 		
 
-		(is (= "No wait times have been reported."
+		(is (= "usage: wait <location>"
              (<!! (handle-message
                     system
                     "test-user"
@@ -242,7 +243,7 @@
                     "test-user"
 					"wait pub"))))
 
-		(is (= "rand: 20min\npub: 20min\ngrins: 15min"
+		(is (= helpers/invalid-location-msg
              (<!! (handle-message
                     system
                     "test-user"

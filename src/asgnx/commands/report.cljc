@@ -45,9 +45,6 @@
 	(and (some #(= item %) series) true))
 
 (defn handler [state pmsg]
-	(println "********** IN HANDLER")
-	(println "********** state " state)
-	(println "********** state " pmsg)
 
 	(let 
 		[	args (:args pmsg)

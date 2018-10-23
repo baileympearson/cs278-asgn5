@@ -3,6 +3,8 @@
 			[asgnx.kvstore :as kvstore]
 			[asgnx.estimation :as estimation]
 			[asgnx.actions :as actions]
+	        [asgnx.helpers :as helpers]
+		
 ))
 
 (defn location-to-string-1 [loc]
@@ -30,11 +32,14 @@
 (defn handler [time pmsg]
 	(let [ 	args 	(:args pmsg)
 			loc 	(first args)	]
-		(if (nil? time)
-			[[] "No wait times have been reported."]
+		(cond 
+			(nil? loc) [[] "usage: wait <location>"]
 
-			;; at this point, we know for sure that the user has registered at some point
-			[[] (loc-to-string loc time)]
-		)
+			(helpers/invalid-location loc) [[] helpers/invalid-location-msg]
+
+			(nil? time)  [[] "No wait times have been reported."]
+
+			:else [[] (loc-to-string loc time)]
+			)
 	)
 )
