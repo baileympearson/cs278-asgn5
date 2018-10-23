@@ -18,6 +18,17 @@ This project will provide a texting interface through which students can registe
 for the service, and then will receive suggestions on the least busy dining locations 
 around main campus.
 
+# Usage
+There are five valid commands:
+
+'''
+	register
+	unregister
+	wait
+	report
+	halp
+'''
+
 # Questions:
   1. Do you eat on campus for lunch?  If so, where?
   2. How do you usually choose your campus dining location for lunch?
