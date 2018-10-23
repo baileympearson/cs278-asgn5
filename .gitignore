@@ -4,3 +4,4 @@ target/*
 .nrepl*
 .serverless/*
 readme-backup.md
+*txt
