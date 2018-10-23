@@ -118,6 +118,24 @@
 				{	"test-user" 	{ :status :choosing-times :location-preferences [:rand :frothy]}}
 			))
 
+		;; register another user at the same time
+		(is (= "Successfully registered."
+             (<!! (handle-message
+                    system
+                    "test-user"
+					"register 11:30 1:15 12:15 8:05 10:15"))))
+
+		(is (= (get-users system)
+				{"test-user" 
+					{:status :choosing-times 
+					:location-preferences [:rand :frothy], 
+					:time-preferences {:mon {:hours 11 :minutes 30} 
+						:tue {:hours 1 :minutes 15} 
+						:wed {:hours 12 :minutes 15} 
+						:thu {:hours 8 :minutes 05} 
+						:fri{:hours 10 :minutes 15}}}}
+			))
+
 		
 		(print-users system)
 

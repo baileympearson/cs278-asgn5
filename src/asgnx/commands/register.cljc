@@ -49,8 +49,35 @@
 	)
 )
 
+(defn str->int [s]
+	#?(:clj  (java.lang.Integer/parseInt s)
+	   :cljs (js/parseInt s)))
+
+(defn split-time [time]
+	(let [ret (string/split time #":")
+			hours 	(str->int (first ret))
+			minutes (str->int (second ret))]
+		{:hours hours :minutes minutes}
+	)
+)
+
+(defn build-day-map [times]
+	{
+		:mon (get times 0)
+		:tue (get times 1)
+		:wed (get times 2)
+		:thu (get times 3)
+		:fri (get times 4)
+	}
+)
+
 (defn choose-times [state pmsg]
-	[[] "choosing times"]
+	(let [	split-times 	(vec (map split-time (:args pmsg))) 
+			time-prefs 		(build-day-map split-times)	
+			user-id 		(:user-id pmsg)		]
+	(println "$$$$$$$$$$$$$$$$$\n\n" time-prefs "\n\n")
+	[[(users/update-one user-id :time-preferences time-prefs)] "Successfully registered."]
+	)
 )
 
 (defn handler [user pmsg]
